@@ -39,6 +39,9 @@ public class ProjEstudoApplication implements CommandLineRunner{
 	
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjEstudoApplication.class, args);
@@ -93,6 +96,7 @@ public class ProjEstudoApplication implements CommandLineRunner{
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1,e2));
 		
+		//Instancia de Pedido e Pagamento
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
 		Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, e1);
@@ -106,7 +110,21 @@ public class ProjEstudoApplication implements CommandLineRunner{
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
-		pagamentoRepository.saveAll(Arrays.asList(pagto1,pagto2));		
+		pagamentoRepository.saveAll(Arrays.asList(pagto1,pagto2));	
+		
+		//Instancia de ItemPedido
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 		
 	}
 }
