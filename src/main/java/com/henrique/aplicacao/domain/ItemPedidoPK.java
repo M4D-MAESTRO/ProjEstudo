@@ -2,7 +2,9 @@ package com.henrique.aplicacao.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Embeddable
 public class ItemPedidoPK implements Serializable{

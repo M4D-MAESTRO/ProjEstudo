@@ -2,7 +2,8 @@ package com.henrique.aplicacao.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
